@@ -1,6 +1,6 @@
 //-*****************************************************************************
 //
-// Copyright (c) 2009-2012,
+// Copyright (c) 2009-2011,
 //  Sony Pictures Imageworks, Inc. and
 //  Industrial Light & Magic, a division of Lucasfilm Entertainment Company Ltd.
 //
@@ -101,18 +101,18 @@ void AbcReader::f( const IndexVec &vIndices,
                    const IndexVec &vtIndices,
                    const IndexVec &vnIndices )
 {
-    size_t count = vIndices.size();
+    int count = vIndices.size();
     if ( count > 2 )
     {
         m_counts.push_back( count );
-        for ( size_t i = 0; i < count; ++i )
+        for ( int i = 0; i < count; ++i )
         {
             m_indices.push_back( ( int )( vIndices[i]-1 ) );
         }
 
         if ( vtIndices.size() == count )
         {
-            for ( size_t i = 0; i < count; ++i )
+            for ( int i = 0; i < count; ++i )
             {
                 m_texIndices.push_back( ( int )( vtIndices[i]-1 ) );
             }
@@ -120,7 +120,7 @@ void AbcReader::f( const IndexVec &vIndices,
         
         if ( vnIndices.size() == count )
         {
-            for ( size_t i = 0; i < count; ++i )
+            for ( int i = 0; i < count; ++i )
             {
                 m_normIndices.push_back( ( int )( vnIndices[i]-1 ) );
             }
@@ -152,6 +152,16 @@ void AbcReader::makeCurrentObject()
         psamp.setFaceIndices( Int32ArraySample( m_indices ) );
         psamp.setFaceCounts( Int32ArraySample( m_counts ) );
 
+        // Gather self bounds.
+        Box3d selfBounds;
+        selfBounds.makeEmpty();
+        size_t NV = m_vertices.size();
+        for ( int i = 0; i < NV; ++i )
+        {
+            selfBounds.extendBy( m_vertices[i] );
+        }
+        psamp.setSelfBounds( selfBounds );
+
         // Set facevarying UVs if they exist.
         std::vector<V2f> fvTexVerts;
         if ( m_texIndices.size() == m_indices.size() &&
@@ -162,10 +172,10 @@ void AbcReader::makeCurrentObject()
             size_t NI = m_texIndices.size();
 
             fvTexVerts.resize( NI );
-            for ( size_t i = 0; i < NI; ++i )
+            for ( int i = 0; i < NI; ++i )
             {
                 int tindex = m_texIndices[i];
-                if ( tindex < 0 || (size_t) tindex >= N )
+                if ( tindex < 0 || tindex >= N )
                 {
                     fvTexVerts[i] = defunct;
                 }
@@ -189,10 +199,10 @@ void AbcReader::makeCurrentObject()
             size_t NI = m_normIndices.size();
 
             fvNormals.resize( NI );
-            for ( size_t i = 0; i < NI; ++i )
+            for ( int i = 0; i < NI; ++i )
             {
                 int nindex = m_normIndices[i];
-                if ( nindex < 0 || (size_t) nindex >= N )
+                if ( nindex < 0 || nindex >= N )
                 {
                     fvNormals[i] = defunct;
                 }
@@ -210,8 +220,6 @@ void AbcReader::makeCurrentObject()
     }
 
     m_indices.clear();
-    m_texIndices.clear();
-    m_normIndices.clear();
     m_counts.clear();
     m_currentObjectName = "";
 }

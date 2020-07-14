@@ -1,6 +1,6 @@
 ##-*****************************************************************************
 ##
-## Copyright (c) 2009-2015,
+## Copyright (c) 2009-2011,
 ##  Sony Pictures Imageworks, Inc. and
 ##  Industrial Light & Magic, a division of Lucasfilm Entertainment Company Ltd.
 ##
@@ -34,48 +34,37 @@
 ##
 ##-*****************************************************************************
 
-SET(CXX_FILES 
-    AbcReader.cpp
-    ParseReader.cpp
-    Parser.cpp
-    Reader.cpp)
+# C++ files for this project
 
-SET(PUBLIC_H_FILES 
-    AbcReader.h
-    All.h
-    Export.h
-    Foundation.h
-    Parser.h
-    Reader.h)
+SET( CXX_FILES 
+     AbcReader.cpp
+     ParseReader.cpp
+     Parser.cpp
+     Reader.cpp )
 
-SET(PRIVATE_H_FILES
-    ParseReader.h)
+SET( PUBLIC_H_FILES 
+     AbcReader.h
+     All.h
+     Foundation.h
+     Parser.h
+     Reader.h )
 
-SET(H_FILES ${PUBLIC_H_FILES} ${PRIVATE_H_FILES})
+SET( PRIVATE_H_FILES
+     ParseReader.h )
 
-SET(SOURCE_FILES ${CXX_FILES} ${H_FILES})
+SET( H_FILES ${PUBLIC_H_FILES} ${PRIVATE_H_FILES} )
 
-ADD_LIBRARY(AbcWFObjConvert ${LIB_TYPE} ${SOURCE_FILES})
-TARGET_LINK_LIBRARIES(AbcWFObjConvert Alembic::Alembic)
+SET( SOURCE_FILES ${CXX_FILES} ${H_FILES} )
 
-IF(ALEMBIC_SHARED_LIBS)
-  SET_TARGET_PROPERTIES(AbcWFObjConvert 
-                        PROPERTIES DEFINE_SYMBOL
-                        ABC_WFOBJ_CONVERT_EXPORTS)
-ENDIF()
+ADD_LIBRARY( AbcWFObjConvert ${SOURCE_FILES} )
 
-INSTALL(TARGETS AbcWFObjConvert
-        LIBRARY DESTINATION ${LIBRARY_INSTALL_DIR}
-        RUNTIME DESTINATION ${RUNTIME_INSTALL_DIR}
-        ARCHIVE DESTINATION ${ARCHIVE_INSTALL_DIR})
+INSTALL( TARGETS AbcWFObjConvert
+         LIBRARY DESTINATION lib
+         ARCHIVE DESTINATION lib/static )
 
-INSTALL(FILES ${PUBLIC_H_FILES}
-        DESTINATION include/AbcClients/WFObjConvert
-        PERMISSIONS OWNER_READ GROUP_READ WORLD_READ)
+INSTALL( FILES ${PUBLIC_H_FILES}
+         DESTINATION include/AbcClients/WFObjConvert
+         PERMISSIONS OWNER_READ GROUP_READ WORLD_READ )
 
-IF (USE_TESTS AND USE_HDF5)
-    ADD_SUBDIRECTORY(Tests)
-ELSE()
-    MESSAGE(STATUS 
-        "Skipping WFObjConvert tests: requires USE_TESTS and USE_HDF5")
-ENDIF()
+ADD_SUBDIRECTORY( Tests )
+

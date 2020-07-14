@@ -34,7 +34,6 @@
 //
 //-*****************************************************************************
 
-#include <AbcClients/WFObjConvert/Export.h>
 #include <AbcClients/WFObjConvert/Foundation.h>
 #include <AbcClients/WFObjConvert/Reader.h>
 
@@ -42,13 +41,11 @@ namespace AbcClients {
 namespace WFObjConvert {
 
 //-*****************************************************************************
-ABC_WFOBJ_CONVERT_EXPORT void 
-ParseOBJ( Reader &iReadInto,
-          const std::string &iName, std::istream &iStream );
+void ParseOBJ( Reader &iReadInto,
+               const std::string &iName, std::istream &iStream );
 
-ABC_WFOBJ_CONVERT_EXPORT void 
-ParseOBJ( Reader &iReadInto,
-          const std::string &iFileName );
+void ParseOBJ( Reader &iReadInto,
+               const std::string &iFileName );
     
 
 } // End namespace AbcClients

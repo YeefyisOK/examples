@@ -1,6 +1,6 @@
 //-*****************************************************************************
 //
-// Copyright (c) 2009-2012,
+// Copyright (c) 2009-2011,
 //  Sony Pictures Imageworks, Inc. and
 //  Industrial Light & Magic, a division of Lucasfilm Entertainment Company Ltd.
 //
@@ -35,7 +35,6 @@
 //-*****************************************************************************
 
 #include <AbcClients/WFObjConvert/ParseReader.h>
-#include <AbcClients/WFObjConvert/Parser.h>
 
 //-*****************************************************************************
 // I'm breaking with the Alembic "Foundation" and "FoundationPrivate"

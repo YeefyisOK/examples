@@ -1,6 +1,6 @@
 //-*****************************************************************************
 //
-// Copyright (c) 2009-2012,
+// Copyright (c) 2009-2011,
 //  Sony Pictures Imageworks, Inc. and
 //  Industrial Light & Magic, a division of Lucasfilm Entertainment Company Ltd.
 //
@@ -34,10 +34,9 @@
 //
 //-*****************************************************************************
 
-#ifndef AbcClients_WFObjConvert_AbcReader_h
-#define AbcClients_WFObjConvert_AbcReader_h
+#ifndef _AbcClients_WFObjConvert_AbcReader_h_
+#define _AbcClients_WFObjConvert_AbcReader_h_
 
-#include <AbcClients/WFObjConvert/Export.h>
 #include <AbcClients/WFObjConvert/Foundation.h>
 #include <AbcClients/WFObjConvert/Reader.h>
 
@@ -47,7 +46,7 @@ namespace WFObjConvert {
 //-*****************************************************************************
 // For now, just going to create vertices, indices, and counts. will
 // worry about the rest later.
-class ABC_WFOBJ_CONVERT_EXPORT AbcReader : public Reader
+class AbcReader : public Reader
 {
 public:
     AbcReader( OObject &iParentObject,
@@ -78,7 +77,7 @@ public:
 
 protected:
     void makeCurrentObject();
-
+    
     OObject m_parentObject;
     std::string m_defaultObjectName;
 
@@ -87,10 +86,10 @@ protected:
     std::vector<V3f> m_vertices;
     std::vector<V2f> m_texVertices;
     std::vector<N3f> m_normals;
-    std::vector<Alembic::Util::int32_t> m_indices;
-    std::vector<Alembic::Util::int32_t> m_texIndices;
-    std::vector<Alembic::Util::int32_t> m_normIndices;
-    std::vector<Alembic::Util::int32_t> m_counts;
+    std::vector<int32_t> m_indices;
+    std::vector<int32_t> m_texIndices;
+    std::vector<int32_t> m_normIndices;
+    std::vector<int32_t> m_counts;
 };
 
 } // End namespace WFObjConvert

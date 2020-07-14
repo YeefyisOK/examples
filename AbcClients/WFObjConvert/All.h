@@ -34,11 +34,10 @@
 //
 //-*****************************************************************************
 
-#ifndef AbcClients_WFObjConvert_All_h
-#define AbcClients_WFObjConvert_All_h
+#ifndef _AbcClients_WFObjConvert_All_h_
+#define _AbcClients_WFObjConvert_All_h_
 
 #include <AbcClients/WFObjConvert/AbcReader.h>
-#include <AbcClients/WFObjConvert/Export.h>
 #include <AbcClients/WFObjConvert/Foundation.h>
 #include <AbcClients/WFObjConvert/Parser.h>
 #include <AbcClients/WFObjConvert/Reader.h>
